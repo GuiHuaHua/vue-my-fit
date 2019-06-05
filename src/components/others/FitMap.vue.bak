@@ -1,0 +1,54 @@
+<template>
+
+<!--    <el-amap vid="amapDemo" :zoom="zoom" :center="center" class="amap-demo">
+      <el-amap-circle v-for="circle in circles" :center="circle.center" :radius="circle.radius" :fill-opacity="circle.fillOpacity" :events="circle.events"></el-amap-circle>
+    </el-amap>-->
+    <div style="height:500px" id="container" tabindex="0"></div>
+
+</template>
+
+<style>
+  .amap-page-container {
+    height: 200px;
+  }
+</style>
+
+<script>
+  import AMap from 'AMap'
+  export default {
+    name: 'FitMap',
+    data() {
+      return {
+        msg: 'hello'
+      }
+    },
+    mounted() {
+      this.init()
+    },
+    method:{
+      init(){
+        let map = new AMap.Map('container', {
+          zoom: 15,
+          center: [121.5273285, 31.21515044],
+          circles: [
+            {
+              center: [121.5273285, 31.21515044],
+              radius: 200,
+              fillOpacity: 0.5,
+              events: {
+                click: () => {
+                  alert('click');
+                }
+              }
+            }
+          ]
+        })
+        AMap.plugin(['AMap.ToolBar', 'AMap.Scale'], function () {
+          map.addControl(new AMap.ToolBar())
+          map.addControl(new AMap.Scale())
+        })
+      }
+    }
+  }
+
+</script>
